@@ -3,8 +3,8 @@ module Ripley
     class LocalVariables
 
       def build_entry(binding, caller_index)
+        return nil if ignore?(binding)
         object = object_name_for(binding, caller_index)
-        return nil if ignore?(object)
         local_variables_hash = list_local_variables(binding)
         [object, local_variables_hash]
       end
@@ -14,21 +14,30 @@ module Ripley
         local_variables_names.inject(Hash.new) do |hash, local_variable_name|
           local_variable_value = binding.eval(local_variable_name.to_s)
           local_variable_value = local_variable_value.to_s
+          # next hash if local_variable_name == :__exception_or_message # ignore Interceptor#raise
           hash.merge(local_variable_name => local_variable_value)
         end
       end
 
       def object_name_for(binding, caller_index)
-        "#{binding.receiver.to_s} (call ##{caller_index})"
+        binding.short_description
+        # binding.object.class.to_s
+        # object = binding.object
+        # if object.is_a?(Class) || object.is_a?(Module)
+        # end
       end
 
-      def ignore?(object_name)
-        return true if object_name.include?('Ripley::')
-        return true if object_name.include?('RSpec::')
-        return true if object_name.start_with?('main')
-        return true if object_name.include?(self.class.name)
+      def ignore?(binding)
+        return true if Register.instance.ignored?(binding.file)
+        # return false if binding.object.respond_to?(:ripleyable?) && binding.object.ripleyable?
+        return true if binding.short_file.start_with?('/gems/ripley')
+        # return true if binding.file.include?('/ripley/')
+        return true if binding.file.include?('rspec')
+        return true if binding.file.include?('ruby_executable_hooks')
         false
       end
+
+      Ripley.ignore_file __FILE__
 
     end
   end

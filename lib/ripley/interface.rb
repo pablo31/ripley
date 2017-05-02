@@ -28,7 +28,7 @@ module Ripley
     end
 
     def log(level, message, include_states=false)
-      states = include_states ? states_by_caller : nil
+      states = include_states ? states_by_caller.to_json : nil
       final_message = formatter.format(message, states)
       logger.send(level, final_message)
     end
@@ -36,7 +36,26 @@ module Ripley
     # 'binding of caller' methods
 
     def states_by_caller
-      Tracker.generate_states_by_caller
+      Tracker.states_by_caller
+    end
+
+    # error handling methods
+
+    def handle_exception(exception_or_message)
+      message = if exception_or_message.is_a?(String)
+        exception_or_message
+      else
+        exception_or_message.message
+      end
+      error(message)
+    end
+
+    def ignore_file(filename)
+      Register.instance.add_ignored_file(filename)
+    end
+
+    def file
+      __FILE__
     end
 
   end

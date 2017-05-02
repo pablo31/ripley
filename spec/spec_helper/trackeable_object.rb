@@ -5,12 +5,12 @@ class TrackeableObject
   end
 
   def a
-    Ripley::Tracker.generate_states_by_caller
+    Ripley::Tracker.states_by_caller
   end
 
   def b
     variable1 = 'mm'
-    Ripley::Tracker.generate_states_by_caller
+    Ripley::Tracker.states_by_caller
   end
 
   def c
@@ -19,7 +19,7 @@ class TrackeableObject
 
   def chain_method_1
     variable1 = 33
-    Ripley::Tracker.generate_states_by_caller
+    Ripley::Tracker.states_by_caller
   end
 
   def d
@@ -29,7 +29,11 @@ class TrackeableObject
 
   def chain_method_2
     variable1 = 'ww'
-    Ripley::Tracker.generate_states_by_caller
+    Ripley::Tracker.states_by_caller
+  end
+
+  def ripleyable?
+    true
   end
 
 end

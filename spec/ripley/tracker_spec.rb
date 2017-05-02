@@ -1,5 +1,7 @@
 require_relative '../spec_helper'
 
+Ripley.ignore_file __FILE__
+
 module Ripley
   describe Tracker do
 
@@ -11,32 +13,32 @@ module Ripley
       expect(variables).to eq expected_variables
     end
 
-    context "the 'generate_states_by_caller' method" do
+    context "the 'states_by_caller' method" do
 
       it "should list nothing" do
         result = subject.a
         expect(result.count).to eq 1
-        match_state(result[0], 'TrackeableObject', {})
+        match_state(result[0], 'trackeable_object', {})
       end
 
       it "should list one variable" do
         result = subject.b
         expect(result.count).to eq 1
-        match_state(result[0], 'TrackeableObject', { variable1: 'mm' })
+        match_state(result[0], 'trackeable_object', { variable1: 'mm' })
       end
 
       it "should list one variable in other method" do
         result = subject.c
         expect(result.count).to eq 2
-        match_state(result[0], 'TrackeableObject', { variable1: '33' })
-        match_state(result[1], 'TrackeableObject', {})
+        match_state(result[0], 'trackeable_object', { variable1: '33' })
+        match_state(result[1], 'trackeable_object', {})
       end
 
       it "should list one local variable and one variable in other method" do
         result = subject.d
         expect(result.count).to eq 2
-        match_state(result[0], 'TrackeableObject', { variable1: 'ww' })
-        match_state(result[1], 'TrackeableObject', { variable1: '42' })
+        match_state(result[0], 'trackeable_object', { variable1: 'ww' })
+        match_state(result[1], 'trackeable_object', { variable1: '42' })
       end
 
     end

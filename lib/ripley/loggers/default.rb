@@ -9,6 +9,8 @@ module Ripley
         "#{message} #{states}"
       end
 
+      Ripley.ignore_file __FILE__
+
     end
   end
 end

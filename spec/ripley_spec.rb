@@ -1,41 +1,32 @@
 require_relative 'spec_helper'
 
+Ripley.ignore_file __FILE__
+
 describe Ripley do
 
   let(:subject){ RipleyableObject.new }
 
-  def match_state(arg, expected_partial_object_name, expected_variables)
-    object_name, variables = arg
-    expect(object_name.include?(expected_partial_object_name)).to be true
-    expect(variables).to eq expected_variables
-  end
-
-  context "the 'generate_states_by_caller' method" do
+  context "the 'states_by_caller' method" do
 
     it "should list nothing" do
-      expect(Ripley.logger).to receive(:error).with('some message [["RipleyableObject", {}]]')
+      expect(Ripley.logger).to receive(:error).with('some message [["RipleyableObject",{}]]')
       subject.a
     end
 
-    # it "should list one variable" do
-    #   result = subject.b
-    #   expect(result.count).to eq 1
-    #   match_state(result[0], 'TrackeableObject', { variable1: 'mm' })
-    # end
+    it "should list one variable" do
+      expect(Ripley.logger).to receive(:error).with('some message [["RipleyableObject",{"variable1":"mm"}]]')
+      subject.b
+    end
 
-    # it "should list one variable in other method" do
-    #   result = subject.c
-    #   expect(result.count).to eq 2
-    #   match_state(result[0], 'TrackeableObject', { variable1: '33' })
-    #   match_state(result[1], 'TrackeableObject', {})
-    # end
+    it "should list one variable in other method" do
+      expect(Ripley.logger).to receive(:error).with('some message [["RipleyableObject",{"variable1":"33"}],["RipleyableObject",{}]]')
+      subject.c
+    end
 
-    # it "should list one local variable and one variable in other method" do
-    #   result = subject.d
-    #   expect(result.count).to eq 2
-    #   match_state(result[0], 'TrackeableObject', { variable1: 'ww' })
-    #   match_state(result[1], 'TrackeableObject', { variable1: '42' })
-    # end
+    it "should list one local variable and one variable in other method" do
+      expect(Ripley.logger).to receive(:error).with('some message [["RipleyableObject",{"variable1":"ww"}],["RipleyableObject",{"variable1":"42"}]]')
+      subject.d
+    end
 
   end
 

@@ -1,16 +1,17 @@
-class RipleyableObject
+class ProblematicObject
+  include Ripley::Interceptor
 
   def params
     'no params'
   end
 
   def a
-    Ripley.error('some message')
+    raise("Generic error message")
   end
 
   def b
     variable1 = 'mm'
-    Ripley.error('some message')
+    raise("Generic error message")
   end
 
   def c
@@ -19,7 +20,7 @@ class RipleyableObject
 
   def chain_method_1
     variable1 = 33
-    Ripley.error('some message')
+    raise("Generic error message")
   end
 
   def d
@@ -29,7 +30,7 @@ class RipleyableObject
 
   def chain_method_2
     variable1 = 'ww'
-    Ripley.error('some message')
+    raise("Generic error message")
   end
 
   def ripleyable?

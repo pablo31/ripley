@@ -28,6 +28,8 @@ module Ripley
         puts "TRACE #{message}"
       end
 
+      Ripley.ignore_file __FILE__
+
     end
   end
 end

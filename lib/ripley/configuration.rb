@@ -8,5 +8,9 @@ module Ripley
       self
     end
 
+    def track_all_exceptions!
+      require 'ripley/ext'
+    end
+
   end
 end
