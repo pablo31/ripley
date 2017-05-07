@@ -1,7 +1,8 @@
 module Ripley
   module Configuration
 
-    attr_accessor :logger, :formatter, :state_entry_builder
+    attr_accessor :logger, :state_entry_builder
+    attr_accessor :logger_formatter, :object_formatter
 
     def configure(&block)
       block.call(self)

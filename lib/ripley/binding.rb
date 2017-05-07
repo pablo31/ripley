@@ -1,6 +1,8 @@
 module Ripley
   class Binding < SimpleDelegator
 
+    # file & line
+
     def line
       eval('__LINE__')
     end
@@ -21,9 +23,23 @@ module Ripley
       "#{short_file}:#{line}"
     end
 
+    # object
+
     def object
       receiver
     end
+
+    # variables
+
+    def local_variables
+      eval('local_variables')
+    end
+
+    def variable_get(variable_name)
+      eval(variable_name.to_s)
+    end
+
+    # misc
 
     # override
     def inspect

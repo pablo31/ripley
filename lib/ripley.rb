@@ -20,13 +20,15 @@ require 'ripley/tracker'
 
 require 'ripley/loggers/default'
 require 'ripley/loggers/stdout'
-require 'ripley/formatters/default'
+require 'ripley/formatters/logger/default'
+require 'ripley/formatters/object/file_and_line'
+require 'ripley/formatters/object/file_name'
 require 'ripley/state_entry_builders/local_variables'
 require 'ripley/interceptor'
 
 module Ripley
-  self.logger = Loggers::Default.new
-  self.formatter = Formatters::Default.new
-  self.state_entry_builder = StateEntryBuilders::LocalVariables.new
   ignore_file(file) # ignore interface.rb
 end
+
+require 'ripley/initializers/defaults'
+require 'ripley/initializers/ignored_bindings'

@@ -33,8 +33,4 @@ class ProblematicObject
     raise("Generic error message")
   end
 
-  def ripleyable?
-    true
-  end
-
 end

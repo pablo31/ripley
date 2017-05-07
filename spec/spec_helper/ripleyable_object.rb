@@ -32,8 +32,4 @@ class RipleyableObject
     Ripley.error('some message')
   end
 
-  def ripleyable?
-    true
-  end
-
 end

@@ -29,7 +29,7 @@ module Ripley
 
     def log(level, message, include_states=false)
       states = include_states ? states_by_caller.to_json : nil
-      final_message = formatter.format(message, states)
+      final_message = logger_formatter.format(message, states)
       logger.send(level, final_message)
     end
 

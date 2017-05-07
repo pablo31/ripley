@@ -1,15 +1,26 @@
 module Ripley
-  module Formatters
+  module Loggers
     class Default
 
-      # generates a message from a log message and the app 'states_by_caller'
+      # does nothing: silent logger
 
-      def format(message, states=nil)
-        return message unless states
-        "#{message} #{states}"
+      def fatal(message)
       end
 
-      Ripley.ignore_file __FILE__
+      def error(message)
+      end
+
+      def warn(message)
+      end
+
+      def info(message)
+      end
+
+      def debug(message)
+      end
+
+      def trace(message)
+      end
 
     end
   end

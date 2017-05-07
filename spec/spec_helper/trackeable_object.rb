@@ -32,8 +32,4 @@ class TrackeableObject
     Ripley::Tracker.states_by_caller
   end
 
-  def ripleyable?
-    true
-  end
-
 end
