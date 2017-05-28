@@ -27,7 +27,6 @@ require 'ripley/formatters/object/file_name'
 require 'ripley/formatters/variable/name'
 require 'ripley/formatters/value/as_string'
 
-require 'ripley/state_entry_builders/local_variables'
 require 'ripley/interceptor'
 
 module Ripley

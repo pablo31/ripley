@@ -4,5 +4,4 @@ module Ripley
   self.object_formatter = Formatters::Object::FileAndLine.new
   self.variable_formatter = Formatters::Variable::Name.new
   self.value_formatter = Formatters::Value::AsString.new
-  self.state_entry_builder = StateEntryBuilders::LocalVariables.new
 end
